@@ -15,69 +15,66 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Swagger配置类
- *
- * @author bin
- * @since 1.0.0
+ * Swagger Configuration Class
  */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
-	@Bean
-	public Docket createAPI() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.apiInfo(apiInfo())
-				.select()
-				//指定哪个包下面生成接口文档
-				.apis(RequestHandlerSelectors.basePackage("com.minio.server.controller"))
-				.paths(PathSelectors.any())
-				.build()
-				.securitySchemes(securitySchemes())
-				.securityContexts(securityContext());
-	}
+    @Bean
+    public Docket createAPI() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                // Specify which package to generate API documentation
+                .apis(RequestHandlerSelectors.basePackage("com.mac.drive.macDrive.controller"))
+                .paths(PathSelectors.any())
+                .build()
+                .securitySchemes(securitySchemes())
+                .securityContexts(securityContext());
+    }
 
-	private List<SecurityContext> securityContext() {
-		List<SecurityContext> result = new ArrayList<>();
-		result.add(getSecurityContext("/hello/.*"));
-		return result;
-	}
+    private List<SecurityContext> securityContext() {
+        List<SecurityContext> result = new ArrayList<>();
+        result.add(getSecurityContext("/hello/.*"));
+        return result;
+    }
 
-	private SecurityContext getSecurityContext(String regexPath) {
-		return SecurityContext.builder()
-				.securityReferences(defaultAuth())
-				.forPaths(PathSelectors.regex(regexPath))
-				.build();
-	}
+    private SecurityContext getSecurityContext(String regexPath) {
+        return SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.regex(regexPath))
+                .build();
+    }
 
-	private List<SecurityReference> defaultAuth() {
-		List<SecurityReference> result = new ArrayList<>();
-		AuthorizationScope authorizationScope = new AuthorizationScope("global","access Everything");
-		AuthorizationScope[] scopes = new AuthorizationScope[1];
-		scopes[0] = authorizationScope;
-		result.add(new SecurityReference("Authorization", scopes));
-		return result;
-	}
+    private List<SecurityReference> defaultAuth() {
+        List<SecurityReference> result = new ArrayList<>();
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "access Everything");
+        AuthorizationScope[] scopes = new AuthorizationScope[1];
+        scopes[0] = authorizationScope;
+        result.add(new SecurityReference("Authorization", scopes));
+        return result;
+    }
 
-	private List<ApiKey> securitySchemes() {
-		List<ApiKey> result = new ArrayList<>();
-		result.add(new ApiKey("Authorization", "Authorization", "header"));
-		return result;
-	}
+    private List<ApiKey> securitySchemes() {
+        List<ApiKey> result = new ArrayList<>();
+        result.add(new ApiKey("Authorization", "Authorization", "header"));
+        return result;
+    }
 
-	/**
-	 * 文档基本信息
-	 *
-	 * @return
-	 */
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder()
-				.version("1.0")
-				.title("网盘接口文档")
-				.description("网盘接口文档")
-				.contact(new Contact("bin", "http://localhost:8081/doc.html", "xxx@xxx.com"))
-				.build();
+    /**
+     * Basic information of the document
+     *
+     * @return
+     */
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .version("1.0")
+                .title("Cloud Storage Interface Documentation")
+                .description("Cloud Storage Interface Documentation")
+                .contact(new Contact("bin", "http://localhost:8081/doc.html", "xxx@xxx.com"))
+                .build();
 
-	}
+    }
 
 }

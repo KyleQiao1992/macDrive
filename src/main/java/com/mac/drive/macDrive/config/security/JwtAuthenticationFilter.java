@@ -17,44 +17,47 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * JWT登录拦截器
- *
- * @author bin
- * @since 1.0.0
+ * JWT Authentication Filter
  */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-	@Value("${jwt.tokenHeader}")
-	private String tokenHeader;
-	@Value("${jwt.tokenHead}")
-	private String tokenHead;
-	@Autowired
-	private JwtTokenUtil jwtTokenUtil;
-	@Autowired
-	private UserDetailsService userDetailsService;
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		String authHeader = request.getHeader(tokenHeader);
-		//存在token
-		if (!StringUtils.isEmpty(authHeader) && authHeader.startsWith(tokenHead)) {
-			String authToken = authHeader.substring(tokenHead.length());
-			//根据token获取用户名
-			String username = jwtTokenUtil.getUserNameFormToken(authToken);
-			//token中存在用户名但是SpringSecurity不存在(未登录)
-			if (!StringUtils.isEmpty(username) && null == SecurityContextHolder.getContext().getAuthentication()) {
-				//登录
-				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-				//判断token是否有效
-				if (jwtTokenUtil.validateToken(authToken, userDetails)) {
-					//把用户对象设置到SpringSecurity全局上下文中
-					UsernamePasswordAuthenticationToken authenticationToken =
-							new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-					authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-					SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-				}
-			}
-		}
-		filterChain.doFilter(request, response);
-	}
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
+
+        String authHeader = request.getHeader(tokenHeader);
+        // If token exists
+        if (!StringUtils.isEmpty(authHeader) && authHeader.startsWith(tokenHead)) {
+            String authToken = authHeader.substring(tokenHead.length());
+            // Get username from token
+            String username = jwtTokenUtil.getUserNameFormToken(authToken);
+            // If username exists in token but not in Spring Security (not logged in)
+            if (!StringUtils.isEmpty(username) && null == SecurityContextHolder.getContext().getAuthentication()) {
+                // Login
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                // Check if token is valid
+                if (jwtTokenUtil.validateToken(authToken, userDetails)) {
+                    // Set the user object in the global context of Spring Security
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(userDetails,
+                                    null,
+                                    userDetails.getAuthorities());
+
+                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                }
+            }
+        }
+        filterChain.doFilter(request, response);
+    }
 }

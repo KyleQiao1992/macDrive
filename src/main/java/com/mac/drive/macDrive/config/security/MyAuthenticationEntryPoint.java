@@ -13,10 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * token失效或者登录失败
- *
- * @author bin
- * @since 1.0.0
+ * When the token is invalid or login fails
  */
 @Component
 public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
@@ -26,7 +23,7 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
-        RespBean respBean = RespBean.error("尚未登录，请登录");
+        RespBean respBean = RespBean.error("Not logged in, please log in");
         respBean.setCode(401);
         writer.write(new ObjectMapper().writeValueAsString(respBean));
         writer.flush();

@@ -13,10 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * 接口没有权限
- *
- * @author bin
- * @since 1.0.0
+ * When an interface has no permission
  */
 @Component
 public class MyAccessDeniedHandler implements AccessDeniedHandler {
@@ -26,7 +23,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
-        RespBean respBean = RespBean.error("权限不足，请联系管理员");
+        RespBean respBean = RespBean.error("Insufficient permissions, please contact the administrator");
         respBean.setCode(403);
         writer.write(new ObjectMapper().writeValueAsString(respBean));
         writer.flush();
