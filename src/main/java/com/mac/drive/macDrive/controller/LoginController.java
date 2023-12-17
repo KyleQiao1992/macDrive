@@ -11,42 +11,34 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
-/**
- * 登录接口
- *
- * @author bin
- * @since 1.0.0
- */
 @RestController
 @RequestMapping("/api")
 public class LoginController {
 
-	@Resource
-	private IAdminService adminService;
+    @Resource
+    private IAdminService adminService;
 
-	@PostMapping("/login")
-	@ApiOperation(value = "登录")
-	@ResponseBody
-	public RespBean login(@RequestBody AdminLoginParam adminLoginParam,HttpServletRequest request) {
-		return adminService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword(), adminLoginParam.getCode(), request);
-	}
+    @PostMapping("/login")
+    @ApiOperation(value = "Login")
+    @ResponseBody
+    public RespBean login(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest request) {
+        return adminService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword(), adminLoginParam.getCode(), request);
+    }
 
-	@GetMapping("/admin/info")
-	@ApiOperation(value = "获取当前登录用户信息")
-	public Admin getAdminInfo(Principal principal) {
-		if (null == principal) {
-			return null;
-		}
-		Admin admin = adminService.getAdminByUserName(principal.getName());
-		admin.setPassword(null);
-		return admin;
-	}
+    @GetMapping("/admin/info")
+    @ApiOperation(value = "Get current logged-in user information")
+    public Admin getAdminInfo(Principal principal) {
+        if (null == principal) {
+            return null;
+        }
+        Admin admin = adminService.getAdminByUserName(principal.getName());
+        admin.setPassword(null);
+        return admin;
+    }
 
-
-	@PostMapping("/logout")
-	@ApiOperation(value = "退出登录")
-	public RespBean logout() {
-		return RespBean.success("注销成功");
-	}
-
+    @PostMapping("/logout")
+    @ApiOperation(value = "Logout")
+    public RespBean logout() {
+        return RespBean.success("Logout successful");
+    }
 }

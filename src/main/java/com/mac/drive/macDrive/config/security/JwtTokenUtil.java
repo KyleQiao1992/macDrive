@@ -12,14 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * JWT工具类
- *
- * @author bin
- * @since 1.0.0
+ * JWT Utility Class
  */
 @Component
 public class JwtTokenUtil {
-
 
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
@@ -28,9 +24,8 @@ public class JwtTokenUtil {
     @Value("${jwt.secret}")
     private String secret;
 
-
     /**
-     * 根据用户名生成token
+     * Generate token based on username
      *
      * @param userDetails
      * @return
@@ -43,7 +38,7 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 根据token获取用户名
+     * Get username from token
      *
      * @return
      */
@@ -59,39 +54,42 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 验证token是否有效
+     * Validate if the token is valid
+     *
      * @param token
      * @param userDetails
      * @return
      */
-    public boolean validateToken(String token,UserDetails userDetails){
+    public boolean validateToken(String token, UserDetails userDetails) {
         String username = getUserNameFormToken(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
     /**
-     * 验证token是否可以刷新
+     * Check if the token can be refreshed
+     *
      * @param token
      * @return
      */
-    public boolean isRefreshToken(String token){
+    public boolean isRefreshToken(String token) {
         return !isTokenExpired(token);
     }
 
     /**
-     * 刷新Token
+     * Refresh Token
+     *
      * @param token
      * @return
      */
-    public String refreshToken(String token){
+    public String refreshToken(String token) {
         Claims claims = getClaimsFromToken(token);
-        claims.put(CLAIM_KEY_CREATED,new Date());
+        claims.put(CLAIM_KEY_CREATED, new Date());
         return generatorToken(claims);
     }
 
-
     /**
-     * 验证token是否过期
+     * Verify if the token has expired
+     *
      * @param token
      * @return
      */
@@ -101,9 +99,8 @@ public class JwtTokenUtil {
         return exp.before(new Date());
     }
 
-
     /**
-     * 根据token获取负载
+     * Get payload from token
      *
      * @return
      */
@@ -114,9 +111,8 @@ public class JwtTokenUtil {
                 .getBody();
     }
 
-
     /**
-     * 根据负载生成Token
+     * Generate Token based on payload
      *
      * @param map
      * @return
@@ -130,13 +126,11 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 失效时间
+     * Generate expiration date
      *
      * @return
      */
     private Date generatorExpiration() {
         return new Date(System.currentTimeMillis() + expiration * 1000);
     }
-
-
 }

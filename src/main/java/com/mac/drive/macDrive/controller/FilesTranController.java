@@ -31,7 +31,7 @@ import java.util.Map;
  * @Description 测试文件上传下载预览和删除
  **/
 @RestController
-@Api(value = "FilesTranController",tags = {"文件上传接口"})
+@Api(value = "FilesTranController", tags = {"文件上传接口"})
 @RequestMapping("/api/FileTran")
 public class FilesTranController {
 
@@ -41,7 +41,6 @@ public class FilesTranController {
     private IFileService fileService;
     @Autowired
     private IFilechunkService filechunkService;
-
 
 
 //    /**
@@ -68,6 +67,7 @@ public class FilesTranController {
 
     /**
      * 返回分片上传需要的签名数据URL及 uploadId
+     *
      * @param upFileParam
      * @return
      */
@@ -76,7 +76,7 @@ public class FilesTranController {
     @ResponseBody
     @ApiOperation(value = "申请上传需要的签名数据URL")
     public Map<String, Object> createMultipartUpload(UpFileParam upFileParam) {
-        String bucketName =  minioUtil.getUsername();
+        String bucketName = minioUtil.getUsername();
         int chunkSize = upFileParam.getChunkNumber();
         Filechunk upFile = new Filechunk();
 //        upFile.setFile_name(upFileParam.getFilename());
@@ -93,7 +93,7 @@ public class FilesTranController {
         upFile.setChunkNumber(chunkSize);
 
         //IdWorker 重命名
-        String fileName = IdWorker.getId() +TypeName;
+        String fileName = IdWorker.getId() + TypeName;
         upFile.setIdworker_name(fileName);
 
         // 根据文件名创建签名
@@ -102,7 +102,11 @@ public class FilesTranController {
         String contentType = "application/octet-stream";
         HashMultimap<String, String> headers = HashMultimap.create();
         headers.put("Content-Type", contentType);
+        if (!minioUtil.bucketExists(bucketName)) {
+            minioUtil.createBucket(bucketName);
+        }
         CreateMultipartUploadResponse response = minioUtil.uploadId(bucketName, null, fileName, headers, null);
+
         String uploadId = response.result().uploadId();
         result.put("uploadId", uploadId);
 
@@ -124,6 +128,7 @@ public class FilesTranController {
 
     /**
      * 分片上传完后合并
+     *
      * @param FileName 文件名
      * @param uploadId 返回的uploadId
      * @return /
@@ -168,25 +173,23 @@ public class FilesTranController {
         filechunkService.remove(Wrapper);
         return true;
 
-            }
-
+    }
 
 
     /**
      * 下载文件
+     *
      * @param bucketName 桶名称
      * @param objectName 对象名称
-     * @param response  相应结果
+     * @param response   相应结果
      */
     @GetMapping("downFile")
     @ApiOperation(value = "下载文件")
-    public void downLoad(@RequestParam(required = false) String bucketName, String objectName,HttpServletResponse response) {
+    public void downLoad(@RequestParam(required = false) String bucketName, String objectName, HttpServletResponse response) {
         bucketName = StringUtils.hasLength(bucketName) ? bucketName : minioUtil.getUsername();
         // 获取文件
-        minioUtil.downResponse(bucketName,objectName,response);
+        minioUtil.downResponse(bucketName, objectName, response);
     }
-
-
 
 
 }

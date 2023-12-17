@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * <p>
- * 用户信息 服务实现类
+ * User Information Service Implementation Class
  * </p>
  *
  * @author bin
@@ -33,19 +33,20 @@ import java.util.Map;
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
 
-    @Autowired
+    @Resource
     private AdminMapper adminMapper;
-    @Autowired
+    @Resource
     private UserDetailsService userDetailsService;
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
-    @Autowired
+    @Resource
     private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
     /**
-     * 登陆后返回token
+     * Return token after login
+     *
      * @param username
      * @param password
      * @param request
@@ -53,58 +54,57 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      */
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
-            //登陆
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if (null== userDetails||!passwordEncoder.matches(password,userDetails.getPassword())){
-                return RespBean.error("用户名或密码不正确");
-            }
-            if (!userDetails.isEnabled()){
-                return RespBean.error("账户被禁用，请联系管理员");
-            }
-            //验证验证码
-            String captcha = (String) request.getSession().getAttribute("captcha");
-            if (StringUtils.isEmpty(code)|| !captcha.equals(code)){
-            return RespBean.error("验证码填写错误");
-            }
-            //更新登陆用户对象
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,
-                    null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            //生成token
-            String token = jwtTokenUtil.generatorToken(userDetails);
-            Map<String, Object> tokenMap = new HashMap<>();
-            tokenMap.put("tokenHead",tokenHead);
-            tokenMap.put("token",token);
-            return RespBean.success("登录成功",tokenMap);
+        // Login
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        if (null == userDetails || !passwordEncoder.matches(password, userDetails.getPassword())) {
+            return RespBean.error("Username or password incorrect");
         }
+        if (!userDetails.isEnabled()) {
+            return RespBean.error("Account disabled, please contact administrator");
+        }
+        // Verify captcha
+        String captcha = (String) request.getSession().getAttribute("captcha");
+        if (StringUtils.isEmpty(code) || !captcha.equals(code)) {
+            return RespBean.error("Incorrect captcha");
+        }
+        // Update login user object
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,
+                null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        // Generate token
+        String token = jwtTokenUtil.generatorToken(userDetails);
+        Map<String, Object> tokenMap = new HashMap<>();
+        tokenMap.put("tokenHead", tokenHead);
+        tokenMap.put("token", token);
+        return RespBean.success("Login successful", tokenMap);
+    }
 
     /**
-     * 根据用户名获取用户对象
+     * Get user object by username
+     *
      * @param username
      * @return
      */
     @Override
     public Admin getAdminByUserName(String username) {
-        return adminMapper.selectOne(new QueryWrapper<Admin>().eq("username",username));
+        return adminMapper.selectOne(new QueryWrapper<Admin>().eq("username", username));
     }
 
     /**
-     * 注册
+     * Register
+     *
      * @return
      */
     @Override
     public int register(Admin user) {
         int bol = adminMapper.insert(user);
         System.out.print(bol);
-        if(bol ==1){
-            Admin i = adminMapper.selectOne(new QueryWrapper<Admin>().eq("username",user.getUsername()));
+        if (bol == 1) {
+            Admin i = adminMapper.selectOne(new QueryWrapper<Admin>().eq("username", user.getUsername()));
             System.out.print(i.getId());
             return i.getId();
-        }
-        else {
+        } else {
             return 0;
         }
     }
-
-
 }

@@ -79,7 +79,7 @@ minio:
   #minio部署的机器ip地址
   endpoint: http://127.0.0.1
   #minio使用的端口
-  port: 9001
+  port: 9000
   #唯一标识的账户
   accessKey: minioadmin
   #账户的密码

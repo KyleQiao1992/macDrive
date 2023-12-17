@@ -17,7 +17,7 @@ import java.util.Collection;
 
 /**
  * <p>
- * 用户信息
+ * User Information
  * </p>
  *
  * @author bin
@@ -28,7 +28,7 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("t_admin")
-@ApiModel(value="Admin对象", description="用户信息")
+@ApiModel(value = "User Information", description = "User Information")
 public class Admin implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -37,25 +37,25 @@ public class Admin implements Serializable, UserDetails {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "姓名")
+    @ApiModelProperty(value = "Name")
     private String name;
 
-    @ApiModelProperty(value = "用户名")
+    @ApiModelProperty(value = "Username")
     private String username;
 
-    @ApiModelProperty(value = "密码")
+    @ApiModelProperty(value = "Password")
     private String password;
 
-    @ApiModelProperty(value = "存储大小")
+    @ApiModelProperty(value = "Disk Size")
     private Double disksize;
 
-    @ApiModelProperty(value = "邮箱")
+    @ApiModelProperty(value = "Email")
     private String email;
 
-    @ApiModelProperty(value = "是否启用")
+    @ApiModelProperty(value = "Is Enabled")
     private boolean enabled;
 
-    @ApiModelProperty(value = "用户头像")
+    @ApiModelProperty(value = "User Avatar")
     private String userFace;
 
 

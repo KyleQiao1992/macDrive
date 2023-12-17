@@ -4,20 +4,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mac.drive.macDrive.pojo.Admin;
 import com.mac.drive.macDrive.pojo.RespBean;
 
-
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <p>
- * 用户信息 服务类
- * </p>
- *
- * @author bin
- * @since 2022-02-08
- */
 public interface IAdminService extends IService<Admin> {
     /**
-     * 登陆后返回token
+     * Return token after login
+     *
      * @param username
      * @param password
      * @param request
@@ -25,23 +17,19 @@ public interface IAdminService extends IService<Admin> {
      */
     RespBean login(String username, String password, String code, HttpServletRequest request);
 
-
     /**
-     * 根据用户名获取用户对象
+     * Get user object by username
+     *
      * @param username
      * @return
      */
     Admin getAdminByUserName(String username);
 
-
     /**
-     * 注册用户
+     * Register user
+     *
      * @param user
      * @return
      */
     int register(Admin user);
-
-
-
-
 }
