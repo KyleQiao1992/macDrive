@@ -7,26 +7,23 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @program: minio
- * @description：注册用户
- * @author: bin
- * @create: 2022-03-17 09:43
+ * Register User
  **/
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Admin注册对象", description="")
+@ApiModel(value = "Admin Registration Object", description = "")
 public class AdminRegisterParam {
-    @ApiModelProperty(value = "用户名",required = true)
+    @ApiModelProperty(value = "Username", required = true)
     private String username;
 
-    @ApiModelProperty(value = "密码",required = true)
+    @ApiModelProperty(value = "Password", required = true)
     private String password;
 
-    @ApiModelProperty(value = "邮箱",required = true)
+    @ApiModelProperty(value = "Email", required = true)
     private String email;
 
-    @ApiModelProperty(value = "邮箱验证码",required = true)
+    @ApiModelProperty(value = "Email Verification Code", required = true)
     private String emailCode;
 
 }

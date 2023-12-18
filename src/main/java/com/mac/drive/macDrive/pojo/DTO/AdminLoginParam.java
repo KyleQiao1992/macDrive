@@ -7,23 +7,20 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * 登录用户对象
- *
- * @author bin
- * @since 1.0.0
+ * Login User Object
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Admin登录对象", description="")
+@ApiModel(value = "Admin Login Object", description = "")
 public class AdminLoginParam {
-    @ApiModelProperty(value = "用户名",required = true)
+    @ApiModelProperty(value = "Username", required = true)
     private String username;
 
-    @ApiModelProperty(value = "密码",required = true)
+    @ApiModelProperty(value = "Password", required = true)
     private String password;
 
-    @ApiModelProperty(value = "验证码",required = true)
+    @ApiModelProperty(value = "Captcha", required = true)
     private String code;
 
 }

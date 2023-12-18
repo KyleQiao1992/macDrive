@@ -70,9 +70,9 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .version("1.0")
-                .title("Cloud Storage Interface Documentation")
-                .description("Cloud Storage Interface Documentation")
-                .contact(new Contact("bin", "http://localhost:8081/doc.html", "xxx@xxx.com"))
+                .title("MacDrive Cloud Interface Documentation")
+                .description("MacDrive Cloud Interface Documentation")
+                .contact(new Contact("yi", "http://localhost:8081/doc.html", "xxx@xxx.com"))
                 .build();
 
     }

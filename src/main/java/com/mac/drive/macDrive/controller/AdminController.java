@@ -14,12 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author bin
- * @since 2022-02-17
+ * Frontend Controller
  */
 @RestController
 @RequestMapping("/api/admin")
@@ -34,64 +29,56 @@ public class AdminController {
     @Resource
     private IFileService fileService;
 
-    @ApiOperation("更新用户信息昵称")
+    @ApiOperation("Update user information nickname")
     @PutMapping("/update")
-    public RespBean updateAdmin(@RequestBody Admin admin){
-        if(adminService.updateById(admin)){
-            return RespBean.success("更新成功");
-        }else {
-            return RespBean.error("更新失败");
+    public RespBean updateAdmin(@RequestBody Admin admin) {
+        if (adminService.updateById(admin)) {
+            return RespBean.success("Update successful");
+        } else {
+            return RespBean.error("Update failed");
         }
 
     }
 
-    @ApiOperation("更新用户密码")
+    @ApiOperation("Update user password")
     @PutMapping("/upPassword")
-    public RespBean updatePassword(String oldPassword,String password){
+    public RespBean updatePassword(String oldPassword, String password) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         Admin admin = adminService.getAdminByUserName(minioUtil.getUsername());
-        if (passwordEncoder.matches(oldPassword,admin.getPassword())){
+        if (passwordEncoder.matches(oldPassword, admin.getPassword())) {
             admin.setPassword(bCryptPasswordEncoder.encode(password));
-            if (adminService.updateById(admin)){
-                return RespBean.success("密码修改成功");
-            }else{
-                return RespBean.error("密码修改失败，未知错误");
+            if (adminService.updateById(admin)) {
+                return RespBean.success("Password changed successfully");
+            } else {
+                return RespBean.error("Password change failed, unknown error");
             }
-        }else {
-            return RespBean.error("原密码错误");
+        } else {
+            return RespBean.error("Original password incorrect");
         }
     }
 
-    @ApiOperation("更新用户头像")
+    @ApiOperation("Update user avatar")
     @PostMapping("/upUserFace")
-    public RespBean upFace(MultipartFile file){
-        try{
-            String objectName = minioUtil.getUsername() + "/" +file.getOriginalFilename();
+    public RespBean upFace(MultipartFile file) {
+        try {
+            String objectName = minioUtil.getUsername() + "/" + file.getOriginalFilename();
             System.out.print(objectName);
-            minioUtil.upload("userface",objectName,file);
-            String url = "http://192.168.2.66:9000/userface/" + objectName;
+            minioUtil.upload("public", objectName, file);
+            String url = "http://127.0.0.1:9000/public/" + objectName;
             Admin admin = adminService.getAdminByUserName(minioUtil.getUsername());
             admin.setUserFace(url);
             adminService.updateById(admin);
-            return RespBean.success("头像更新成功");
-               } catch (Exception e) {
-            return RespBean.success("头像更新失败",e);
-             }
+            return RespBean.success("Avatar updated successfully");
+        } catch (Exception e) {
+            return RespBean.success("Avatar update failed", e);
+        }
     }
 
-    @ApiOperation("用户使用存储大小")
+    @ApiOperation("User used storage size")
     @GetMapping("/getStorage")
-    public RespBean getStorage(){
-        String username=minioUtil.getUsername();
+    public RespBean getStorage() {
+        String username = minioUtil.getUsername();
         Long sum = fileService.sumBybuck(username);
-        return RespBean.success("",sum);
+        return RespBean.success("", sum);
     }
-
-//    @ApiOperation("遍历用户")
-//    @GetMapping("/test")
-//    public RespBean test(){
-
-//    }
-
 }
-

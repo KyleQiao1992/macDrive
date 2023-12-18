@@ -9,30 +9,27 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @program: minio_sever
- * @description：遍历目录树
- * @author: bin
- * @create: 2022-04-13 18:02
+ * Traverse Directory Tree
  **/
 @Data
 public class TreeNodeVO {
 
-    @ApiModelProperty(value = "节点id")
+    @ApiModelProperty(value = "Node ID")
     private Long id;
 
-    @ApiModelProperty(value = "节点名")
+    @ApiModelProperty(value = "Node Name")
     private String label;
 
-    @ApiModelProperty(value = "深度")
+    @ApiModelProperty(value = "Depth")
     private Long depth;
 
-    @ApiModelProperty(value = "是否被关闭")
+    @ApiModelProperty(value = "Is Closed")
     private String state = "closed";
 
-    @ApiModelProperty(value = "属性集合")
+    @ApiModelProperty(value = "Attributes Collection")
     private Map<String, String> attributes = new HashMap<>();
 
-    @ApiModelProperty(value = "子节点列表")
+    @ApiModelProperty(value = "List of Child Nodes")
     private List<TreeNodeVO> children = new ArrayList<>();
 
 }

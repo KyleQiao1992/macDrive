@@ -21,7 +21,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_admin_role")
-@ApiModel(value="AdminRole对象", description="")
+@ApiModel(value = "AdminRole Object", description = "")
 public class AdminRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,11 +30,9 @@ public class AdminRole implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "User id")
     private Integer adminId;
 
-    @ApiModelProperty(value = "权限id")
+    @ApiModelProperty(value = "Role id")
     private Integer rid;
-
-
 }
