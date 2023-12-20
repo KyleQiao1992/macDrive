@@ -15,10 +15,10 @@ import io.minio.messages.Part;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
@@ -28,45 +28,22 @@ import java.util.Map;
 /**
  * @Author bin
  * @CreateTime 2022/2/10
- * @Description 测试文件上传下载预览和删除
+ * @Description Test file upload, download, preview, and deletion
  **/
 @RestController
-@Api(value = "FilesTranController", tags = {"文件上传接口"})
+@Api(value = "FilesTranController", tags = {"File Upload Interface"})
 @RequestMapping("/api/FileTran")
 public class FilesTranController {
 
-    @Autowired
+    @Resource
     private MinioUtil minioUtil;
-    @Autowired
+    @Resource
     private IFileService fileService;
-    @Autowired
+    @Resource
     private IFilechunkService filechunkService;
 
-
-//    /**
-//     * 上传文件
-//     * @param file
-//     * @param bucketName 桶名称
-//     * @return 返回对象名称和外链地址
-//     */
-//    @PostMapping(value = "/upFile")
-//    @ApiOperation(value = "上传流文件")
-//    public RespBean uploadFile(MultipartFile file, @RequestParam(required = false) String bucketName, String url) {
-//        bucketName = StringUtils.hasLength(bucketName) ? bucketName : minioUtil.getUsername();
-//        String objectName = url + file.getOriginalFilename();
-//        boolean bol = minioUtil.upload(bucketName, objectName, file);
-//        String viewPath = minioUtil.getPresignedObjectUrl(bucketName, objectName, 60, TimeUnit.SECONDS);
-//        HashMap<String, String> objectInfo = new HashMap<>();
-//        objectInfo.put("objectName", file.getOriginalFilename());
-//        //只能预览图片、txt等部分文件
-//        objectInfo.put("FilePath", viewPath);
-//        if(bol){return RespBean.success("上传文件成功",objectInfo);}
-//        else return RespBean.error("上传文件失败");
-//    }
-
-
     /**
-     * 返回分片上传需要的签名数据URL及 uploadId
+     * Returns the signed URL and uploadId required for multipart upload
      *
      * @param upFileParam
      * @return
@@ -74,7 +51,7 @@ public class FilesTranController {
     @GetMapping("/createMultipartUpload")
     @SneakyThrows
     @ResponseBody
-    @ApiOperation(value = "申请上传需要的签名数据URL")
+    @ApiOperation(value = "Apply for the signed URL data needed for upload")
     public Map<String, Object> createMultipartUpload(UpFileParam upFileParam) {
         String bucketName = minioUtil.getUsername();
         int chunkSize = upFileParam.getChunkNumber();
@@ -92,13 +69,13 @@ public class FilesTranController {
         upFile.setFile_type(TypeName.substring(1));
         upFile.setChunkNumber(chunkSize);
 
-        //IdWorker 重命名
+        // Rename using IdWorker
         String fileName = IdWorker.getId() + TypeName;
         upFile.setIdworker_name(fileName);
 
-        // 根据文件名创建签名
+        // Create a signature based on the file name
         Map<String, Object> result = new HashMap<>();
-        // 获取uploadId
+        // Get uploadId
         String contentType = "application/octet-stream";
         HashMultimap<String, String> headers = HashMultimap.create();
         headers.put("Content-Type", contentType);
@@ -113,28 +90,28 @@ public class FilesTranController {
         upFile.setUploadId(uploadId);
         filechunkService.save(upFile);
 
-        // 请求Minio 服务，获取每个分块带签名的上传URL
+        // Request Minio service, get the signed upload URL for each chunk
         Map<String, String> reqParams = new HashMap<>();
         reqParams.put("uploadId", uploadId);
-        // 循环分块数 从1开始,MinIO 存储服务定义分片索引却是从1开始的
+        // Loop the chunk number starting from 1, as the MinIO storage service defines the chunk index starting from 1
         for (int i = 1; i <= chunkSize; i++) {
             reqParams.put("partNumber", String.valueOf(i));
-            String uploadUrl = minioUtil.getPresignedObjectUrl(bucketName, fileName, reqParams);// 获取URL,主要这里前端上传的时候，要传递二进制流，而不是file
-            result.put("chunk_" + (i - 1), uploadUrl); // 添加到集合
+            String uploadUrl = minioUtil.getPresignedObjectUrl(bucketName, fileName, reqParams);// Get the URL, note that the front end uploads binary stream, not file
+            result.put("chunk_" + (i - 1), uploadUrl); // Add to the collection
         }
         return result;
     }
 
 
     /**
-     * 分片上传完后合并
+     * After the chunks are uploaded, merge them
      *
-     * @param FileName 文件名
-     * @param uploadId 返回的uploadId
+     * @param FileName file name
+     * @param uploadId the returned uploadId
      * @return /
      */
     @GetMapping("/completeMultipartUpload")
-    @ApiOperation(value = "上传分片后合并")
+    @ApiOperation(value = "Merge after uploading chunks")
     @SneakyThrows
     @ResponseBody
     public boolean completeMultipartUpload(String FileName, String uploadId) {
@@ -145,14 +122,14 @@ public class FilesTranController {
         String objectName = upFile.getIdworker_name();
         try {
             Part[] parts = new Part[10000];
-            // 1. 查询分片
+            // 1. Query the chunks
             ListPartsResponse partResult = minioUtil.listMultipart(bucketName, null, objectName, 10000, 0, uploadId, null, null);
-            int partNumber = 1; // 分片序列从1开始
+            int partNumber = 1; // Chunk sequence starts from 1
 //            System.err.println(partResult.result().partList().size() + "========================");
-            // 2. 循环获取到的分片信息
+            // 2. Loop through the retrieved chunk information
             List<Part> partList = partResult.result().partList();
             for (int i = 0; i < partList.size(); i++) {
-                // 3. 将分片标记传递给Part对象
+                // 3. Pass the chunk marker to the Part object
                 parts[partNumber - 1] = new Part(partNumber, partList.get(i).etag());
                 partNumber++;
             }
@@ -177,19 +154,17 @@ public class FilesTranController {
 
 
     /**
-     * 下载文件
+     * Download the file
      *
-     * @param bucketName 桶名称
-     * @param objectName 对象名称
-     * @param response   相应结果
+     * @param bucketName bucket name
+     * @param objectName object name
+     * @param response   response result
      */
     @GetMapping("downFile")
-    @ApiOperation(value = "下载文件")
+    @ApiOperation(value = "Download file")
     public void downLoad(@RequestParam(required = false) String bucketName, String objectName, HttpServletResponse response) {
         bucketName = StringUtils.hasLength(bucketName) ? bucketName : minioUtil.getUsername();
-        // 获取文件
+        // Get the file
         minioUtil.downResponse(bucketName, objectName, response);
     }
-
-
 }
