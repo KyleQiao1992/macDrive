@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * 公共返回对象
  *
- * @author bin
+ * @author yi
  * @since 1.0.0
  */
 @Data

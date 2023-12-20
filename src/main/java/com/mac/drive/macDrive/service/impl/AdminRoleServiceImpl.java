@@ -8,14 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author bin
- * @since 2022-02-25
- */
 @Service
 public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole> implements IAdminRoleService {
 

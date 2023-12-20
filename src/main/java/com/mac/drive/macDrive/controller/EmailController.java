@@ -11,13 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @program: minio
- * @description：邮箱接口
- * @author: bin
- * @create: 2022-03-09 16:19
- **/
-
 @Controller
 @RequestMapping("/api")
 public class EmailController {
@@ -28,26 +21,26 @@ public class EmailController {
     private RedisTemplate<String, Object> redisTemplate;
 
     /**
-     * 发送验证码 redis存储验证码
-     * @param toEmail 被发送的邮箱账号
+     * Send verification code, store the code in Redis
+     *
+     * @param toEmail the email address to send to
      */
     @PostMapping("/sendEmail")
     @ResponseBody
     public RespBean sendEmail(String toEmail) {
-        //生成6位随机数
+        // Generate a 6-digit random number
         String i = String.valueOf((int) ((Math.random() * 9 + 1) * 100000));
         try {
-            //发送邮件
-            mailServiceUtils.sendMail("********@qq.com", toEmail, "网盘验证码", i);
-            //redis保存验证码
+            // Send email
+            mailServiceUtils.sendMail("********@qq.com", toEmail, "Cloud Disk Verification Code", i);
+            // Redis saves the verification code
             redisTemplate.opsForValue().set(toEmail, i);
         } catch (Exception e) {
-            return RespBean.error("发送邮件失败");
+            return RespBean.error("Failed to send email");
         }
-        //三分过期
-        redisTemplate.expire(toEmail, 60*3000, TimeUnit.MILLISECONDS);
-        return RespBean.success("发送验证码成功，请在三分钟内填写");
+        // Expires in three minutes
+        redisTemplate.expire(toEmail, 60 * 3000, TimeUnit.MILLISECONDS);
+        return RespBean.success("Verification code sent successfully, please fill in within three minutes");
 
     }
-
 }

@@ -14,14 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author bin
- * @since 2022-03-20
- */
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
 

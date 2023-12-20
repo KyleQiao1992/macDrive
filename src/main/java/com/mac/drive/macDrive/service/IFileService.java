@@ -5,14 +5,6 @@ import com.mac.drive.macDrive.pojo.File;
 
 import java.util.List;
 
-/**
- * <p>
- * 文件信息表 服务类
- * </p>
- *
- * @author bin
- * @since 2022-02-27
- */
 public interface IFileService extends IService<File> {
 
     List<File> getFilesByPath(String bucketName, String url, Long CurrentPage, Long PageCount);

@@ -11,14 +11,6 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author bin
- * @since 2022-04-22
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_filechunk")

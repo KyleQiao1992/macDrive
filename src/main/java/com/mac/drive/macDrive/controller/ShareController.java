@@ -9,13 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-/**
- * @program: minio_sever
- * @description：分享文件接口类
- * @author: bin
- * @create: 2022-05-20 11:03
- **/
-
 @RestController
 @RequestMapping("/api/share")
 public class ShareController {

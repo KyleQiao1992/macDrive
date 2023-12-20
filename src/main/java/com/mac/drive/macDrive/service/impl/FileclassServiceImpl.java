@@ -6,14 +6,6 @@ import com.mac.drive.macDrive.pojo.Fileclass;
 import com.mac.drive.macDrive.service.IFileclassService;
 import org.springframework.stereotype.Service;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author bin
- * @since 2022-04-09
- */
 @Service
 public class FileclassServiceImpl extends ServiceImpl<FileclassMapper, Fileclass> implements IFileclassService {
 

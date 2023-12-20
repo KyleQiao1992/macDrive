@@ -26,9 +26,7 @@ import java.util.Map;
 
 
 /**
- * @Author bin
- * @CreateTime 2022/2/10
- * @Description Test file upload, download, preview, and deletion
+ * Test file upload, download, preview, and deletion
  **/
 @RestController
 @Api(value = "FilesTranController", tags = {"File Upload Interface"})

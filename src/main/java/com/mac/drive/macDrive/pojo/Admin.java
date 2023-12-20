@@ -15,14 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serializable;
 import java.util.Collection;
 
-/**
- * <p>
- * User Information
- * </p>
- *
- * @author bin
- * @since 2022-02-08
- */
 @Data
 @Configuration
 @EqualsAndHashCode(callSuper = false)

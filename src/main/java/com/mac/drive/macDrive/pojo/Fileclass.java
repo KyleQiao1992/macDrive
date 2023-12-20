@@ -10,14 +10,6 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author bin
- * @since 2022-04-09
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_fileclass")

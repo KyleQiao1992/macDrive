@@ -1,6 +1,5 @@
 package com.mac.drive.macDrive.controller;
 
-
 import com.mac.drive.macDrive.pojo.File;
 import com.mac.drive.macDrive.service.IFileService;
 import com.mac.drive.macDrive.utils.MinioUtil;
@@ -19,12 +18,12 @@ import java.io.InputStream;
 
 /**
  * @program: minio_sever
- * @description：文件前端展示接口
+ * @description: File frontend display interface
  * @author: bin
  * @create: 2022-04-28 19:52
  **/
 @RestController
-@Api(value = "ShowController",tags = {"文件获取/展示操作"})
+@Api(value = "ShowController", tags = {"File Retrieval/Display Operations"})
 @RequestMapping("/api/object")
 public class ShowController {
 
@@ -33,132 +32,90 @@ public class ShowController {
     @Autowired
     private MinioUtil minioUtil;
 
-
-    @ApiOperation(value = "流文件展示/Type")
+    @ApiOperation(value = "Stream file display/Type")
     @GetMapping("/show/{fileId}")
-    public void thumbnail(@PathVariable  String fileId,HttpServletResponse  response){
+    public void thumbnail(@PathVariable String fileId, HttpServletResponse response) {
 
         File FileShow = fileService.getById(fileId);
-        //获取MinIO分享链接
+        // Get MinIO share link
         String objectName = FileShow.getFile_inbuck_name();
         String bucketName = FileShow.getFile_bucket_name();
 
         try {
-            // 获取object的输入流。
-            InputStream stream = minioUtil.getFileInputStream(objectName,bucketName);
-            //流转换
-            IOUtils.copy(stream,response.getOutputStream());
-            //设置返回类型
+            // Get the object's input stream.
+            InputStream stream = minioUtil.getFileInputStream(objectName, bucketName);
+            // Stream conversion
+            IOUtils.copy(stream, response.getOutputStream());
+            // Set return type
             response.addHeader("Content-Type", "audio/mpeg;charset=utf-8");
-//            // 关闭流
+            // Close the stream
             stream.close();
         } catch (Exception e) {
             System.out.println("Error occurred: " + e);
         }
-//
-//        return "success";
     }
 
-
-    @ApiOperation(value = "文件下载/Disposition")
+    @ApiOperation(value = "File download/Disposition")
     @GetMapping("/send/{fileId}")
-    public void ObjectSend(@PathVariable  String fileId,HttpServletResponse  response){
+    public void ObjectSend(@PathVariable String fileId, HttpServletResponse response) {
         File FileShow = fileService.getById(fileId);
-        //获取MinIO分享链接
+        // Get MinIO share link
         String objectName = FileShow.getFile_inbuck_name();
         String bucketName = FileShow.getFile_bucket_name();
-        String fileName = FileShow.getFile_name()+"."+FileShow.getFile_type();
+        String fileName = FileShow.getFile_name() + "." + FileShow.getFile_type();
 
         try {
-            // 获取object的输入流。
-            InputStream stream = minioUtil.getFileInputStream(objectName,bucketName);
+            // Get the object's input stream.
+            InputStream stream = minioUtil.getFileInputStream(objectName, bucketName);
 
-            //流转换
-//            IOUtils.copy(stream,response.getOutputStream());
+            // Stream conversion
+            // IOUtils.copy(stream, response.getOutputStream());
 
-            final StatObjectResponse stat = minioUtil.getObjectStat(objectName,bucketName);
+            final StatObjectResponse stat = minioUtil.getObjectStat(objectName, bucketName);
             response.setContentType(stat.contentType());
             response.setCharacterEncoding("UTF-8");
-            //设置返回类型
+            // Set return type
             response.setHeader("Content-Disposition", "attachment;filename=" + java.net.URLEncoder.encode(fileName, "UTF-8"));
-            //这里注释掉  要不然会报错
-//            response.flushBuffer();
-            //流转换
+            // Commented out, otherwise will throw an error
+            // response.flushBuffer();
+            // Stream conversion
             org.apache.tomcat.util.http.fileupload.IOUtils.copy(stream, response.getOutputStream());
-//            // 关闭流
+            // Close the stream
             stream.close();
         } catch (Exception e) {
             System.out.println("Error occurred: " + e);
         }
     }
 
-//
-//    @ApiOperation(value = "文本文件展示/Type")
-//    @GetMapping( "/preview/{fileId}")
-//    public void textShow(@PathVariable String fileId,HttpServletResponse  response){
-//        File FileShow = fileService.getById(fileId);
-//        //获取MinIO分享链接
-//        String objectName = FileShow.getFile_inbuck_name();
-//        String bucketName = FileShow.getFile_bucket_name();
-//        String fileName = FileShow.getFile_name()+"."+FileShow.getFile_type();
-//
-//        try {
-//            // 获取object的输入流。
-//            InputStream stream = minioUtil.getFileInputStream(objectName,bucketName);
-//
-//            //流转换
-////            IOUtils.copy(stream,response.getOutputStream());
-//
-//            final StatObjectResponse stat = minioUtil.getObjectStat(objectName,bucketName);
-//            response.setContentType(stat.contentType());
-//            response.setCharacterEncoding("UTF-8");
-//            //设置返回类型
-//            response.setHeader("Content-Type", "text/html; charset=utf-8");
-//            //这里注释掉  要不然会报错
-////            response.flushBuffer();
-//            //流转换
-//            org.apache.tomcat.util.http.fileupload.IOUtils.copy(stream, response.getOutputStream());
-////            // 关闭流
-//            stream.close();
-//        } catch (Exception e) {
-//            System.out.println("Error occurred: " + e);
-//        }
-//    }
-
-
-
-    @ApiOperation(value = "文本文件展示/Type")
-    @GetMapping( "/preview/txt")
-    public void textShsowsss(String userFileId,HttpServletResponse  response){
+    @ApiOperation(value = "Text file display/Type")
+    @GetMapping("/preview/txt")
+    public void textShow(String userFileId, HttpServletResponse response) {
         File FileShow = fileService.getById(userFileId);
-        //获取MinIO分享链接
+        // Get MinIO share link
         String objectName = FileShow.getFile_inbuck_name();
         String bucketName = FileShow.getFile_bucket_name();
-        String fileName = FileShow.getFile_name()+"."+FileShow.getFile_type();
+        String fileName = FileShow.getFile_name() + "." + FileShow.getFile_type();
 
         try {
-            // 获取object的输入流。
-            InputStream stream = minioUtil.getFileInputStream(objectName,bucketName);
+            // Get the object's input stream.
+            InputStream stream = minioUtil.getFileInputStream(objectName, bucketName);
 
-            //流转换
-//            IOUtils.copy(stream,response.getOutputStream());
+            // Stream conversion
+            // IOUtils.copy(stream, response.getOutputStream());
 
-            final StatObjectResponse stat = minioUtil.getObjectStat(objectName,bucketName);
+            final StatObjectResponse stat = minioUtil.getObjectStat(objectName, bucketName);
             response.setContentType(stat.contentType());
             response.setCharacterEncoding("UTF-8");
-            //设置返回类型
+            // Set return type
             response.setHeader("Content-Type", "text/html; charset=utf-8");
-            //这里注释掉  要不然会报错
-//            response.flushBuffer();
-            //流转换
+            // Commented out, otherwise will throw an error
+            // response.flushBuffer();
+            // Stream conversion
             org.apache.tomcat.util.http.fileupload.IOUtils.copy(stream, response.getOutputStream());
-//            // 关闭流
+            // Close the stream
             stream.close();
         } catch (Exception e) {
             System.out.println("Error occurred: " + e);
         }
     }
-
-
-
 }

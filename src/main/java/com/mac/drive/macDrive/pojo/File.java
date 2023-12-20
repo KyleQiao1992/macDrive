@@ -17,7 +17,7 @@ import java.util.List;
  * 文件信息表
  * </p>
  *
- * @author bin
+ * @author yi
  * @since 2022-02-27
  */
 @Data

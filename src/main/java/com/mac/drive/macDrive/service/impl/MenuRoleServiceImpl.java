@@ -6,14 +6,6 @@ import com.mac.drive.macDrive.pojo.MenuRole;
 import com.mac.drive.macDrive.service.IMenuRoleService;
 import org.springframework.stereotype.Service;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author bin
- * @since 2022-03-20
- */
 @Service
 public class MenuRoleServiceImpl extends ServiceImpl<MenuRoleMapper, MenuRole> implements IMenuRoleService {
 

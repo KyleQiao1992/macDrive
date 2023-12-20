@@ -5,14 +5,6 @@ import com.mac.drive.macDrive.pojo.File;
 
 import java.util.List;
 
-/**
- * <p>
- * 文件信息表 Mapper 接口
- * </p>
- *
- * @author bin
- * @since 2022-02-27
- */
 public interface FileMapper extends BaseMapper<File> {
 
 

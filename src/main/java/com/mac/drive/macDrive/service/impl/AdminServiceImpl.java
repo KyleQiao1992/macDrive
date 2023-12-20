@@ -22,14 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <p>
- * User Information Service Implementation Class
- * </p>
- *
- * @author bin
- * @since 2022-02-08
- */
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
 
