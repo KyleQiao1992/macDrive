@@ -1,4 +1,48 @@
-<mxfile host="app.diagrams.net" modified="2023-12-21T07:01:17.067Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="NM7X_vZmm-H8zzy51lw-" version="22.1.11" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2023-12-21T07:02:41.682Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="gTqzZuu2DN5uPgagkMwg" version="22.1.11" type="github" pages="3">
+  <diagram id="ILCn9BO9myJM3LrbQQf_" name="plantUML">
+    <mxGraphModel dx="929" dy="615" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LQySnjO1yDNA73CeL4dr-1" value="&lt;div&gt;@startuml&lt;/div&gt;&lt;div&gt;actor User&lt;/div&gt;&lt;div&gt;participant &quot;Registration Page&quot; as RegPage&lt;/div&gt;&lt;div&gt;participant &quot;Email Service&quot; as EmailService&lt;/div&gt;&lt;div&gt;participant &quot;Authentication Service&quot; as AuthService&lt;/div&gt;&lt;div&gt;participant &quot;Token Service&quot; as TokenService&lt;/div&gt;&lt;div&gt;database &quot;Database&quot; as DB&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; RegPage : Access Registration Page&lt;/div&gt;&lt;div&gt;RegPage -&amp;gt; User : Display Registration Form&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; RegPage : Enter Username, Password, Email&lt;/div&gt;&lt;div&gt;User -&amp;gt; RegPage : Submit Registration Info&lt;/div&gt;&lt;div&gt;RegPage -&amp;gt; AuthService : Request Username and Email Validation&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; DB : Check for Unique Username and Email&lt;/div&gt;&lt;div&gt;DB --&amp;gt; AuthService : Confirm Uniqueness&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; TokenService : Request Activation Token Generation&lt;/div&gt;&lt;div&gt;TokenService -&amp;gt; DB : Create Activation Token and Associate with User Info&lt;/div&gt;&lt;div&gt;DB --&amp;gt; TokenService : Activation Token Created Successfully&lt;/div&gt;&lt;div&gt;TokenService --&amp;gt; AuthService : Return Activation Token&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; EmailService : Send Email with Activation Token for Verification&lt;/div&gt;&lt;div&gt;EmailService -&amp;gt; User : Send Activation Email&lt;/div&gt;&lt;div&gt;User -&amp;gt; EmailService : Click Activation Link in Email&lt;/div&gt;&lt;div&gt;EmailService -&amp;gt; AuthService : Validate Activation Link and Token&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; DB : Activate User Account&lt;/div&gt;&lt;div&gt;DB --&amp;gt; AuthService : Account Activation Successful&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; User : Confirm Account Activation and Provide Login Page&lt;/div&gt;&lt;div&gt;@enduml&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="150" width="600" height="510" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-2" value="UserRegister" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="120" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-3" value="&lt;div&gt;@startuml&lt;/div&gt;&lt;div&gt;actor User&lt;/div&gt;&lt;div&gt;participant &quot;Login Page&quot; as LoginPage&lt;/div&gt;&lt;div&gt;participant &quot;Captcha Service&quot; as Captcha&lt;/div&gt;&lt;div&gt;participant &quot;Authentication Service&quot; as AuthService&lt;/div&gt;&lt;div&gt;participant &quot;Token Service&quot; as TokenService&lt;/div&gt;&lt;div&gt;database &quot;Database&quot; as DB&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : Accesses Login Page&lt;/div&gt;&lt;div&gt;LoginPage -&amp;gt; Captcha : Request Captcha&lt;/div&gt;&lt;div&gt;Captcha --&amp;gt; LoginPage : Display Captcha Image&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : Enters Username and Password&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : Enters Captcha Code&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : (Optional) Selects &quot;Remember me&quot;&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : Clicks &quot;Login&quot;&lt;/div&gt;&lt;div&gt;LoginPage -&amp;gt; AuthService : Submits Credentials &amp;amp; Captcha Code&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; Captcha : Validates Captcha Code&lt;/div&gt;&lt;div&gt;Captcha --&amp;gt; AuthService : Captcha Valid&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; DB : Checks User Details&lt;/div&gt;&lt;div&gt;DB --&amp;gt; AuthService : User Details Valid&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; TokenService : Request Token Generation&lt;/div&gt;&lt;div&gt;TokenService -&amp;gt; DB : Create and Store Token&lt;/div&gt;&lt;div&gt;DB --&amp;gt; TokenService : Token Created&lt;/div&gt;&lt;div&gt;TokenService --&amp;gt; AuthService : Token Generated&lt;/div&gt;&lt;div&gt;AuthService --&amp;gt; LoginPage : User Authenticated&lt;/div&gt;&lt;div&gt;LoginPage -&amp;gt; User : Displays Dashboard / User Area&lt;/div&gt;&lt;div&gt;@enduml&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="730" width="600" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-4" value="User Login" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="700" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-5" value="&lt;div&gt;@startuml&lt;/div&gt;&lt;div&gt;actor User&lt;/div&gt;&lt;div&gt;participant &quot;mac-drive-web (UI)&quot; as UI&lt;/div&gt;&lt;div&gt;participant &quot;macDrive&quot; as AppServer&lt;/div&gt;&lt;div&gt;participant &quot;Minio Server&quot; as Minio&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; UI : Selects file and initiates upload&lt;/div&gt;&lt;div&gt;UI -&amp;gt; AppServer : Sends upload request&lt;/div&gt;&lt;div&gt;AppServer -&amp;gt; Minio : Requests file storage&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; Minio : Stores the file&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; Minio : Confirms successful storage and generate docId&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; AppServer : Confirms file is stored&lt;/div&gt;&lt;div&gt;AppServer -&amp;gt; UI : Notifies successful upload&lt;/div&gt;&lt;div&gt;UI -&amp;gt; User : Displays success message&lt;/div&gt;&lt;div&gt;@enduml&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1180" width="600" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-6" value="File Upload" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1150" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-7" value="@startuml&#xa;actor User&#xa;participant &quot;mac-drive-web&quot; as UI&#xa;participant &quot;macDrive&quot; as AppServer&#xa;participant &quot;Minio Server&quot; as Minio&#xa;&#xa;&#xa;User -&gt; UI : Selects file&#xa;UI -&gt; AppServer : Initiates upload&#xa;AppServer -&gt; AppServer : Splits file into chunks&#xa;loop for each chunk&#xa;    AppServer -&gt; Minio : Uploads chunk&#xa;    Minio -&gt; Minio : Stores chunk&#xa;    Minio -&gt; Minio : Confirms storage&#xa;    Minio -&gt; AppServer : Confirms chunk upload&#xa;end&#xa;AppServer -&gt; AppServer : Reassembles file from chunks&#xa;AppServer -&gt; Minio : Sends reassembled file metadata&#xa;Minio -&gt; Minio : Stores metadata&#xa;Minio -&gt; Minio : Confirms metadata storage&#xa;Minio -&gt; AppServer : Confirms file is ready&#xa;AppServer -&gt; UI : Notifies successful upload&#xa;UI -&gt; User : Displays success message&#xa;@enduml" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1510" width="600" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-8" value="File Chunk Upload" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1480" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-9" value="&lt;div&gt;@startuml&lt;/div&gt;&lt;div&gt;actor User&lt;/div&gt;&lt;div&gt;participant &quot;User Interface (UI)&quot; as UI&lt;/div&gt;&lt;div&gt;participant &quot;Application Server&quot; as AppServer&lt;/div&gt;&lt;div&gt;participant &quot;Minio Server&quot; as Minio&lt;/div&gt;&lt;div&gt;database &quot;Data Storage&quot; as Storage&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; UI : Requests to view files&lt;/div&gt;&lt;div&gt;UI -&amp;gt; AppServer : Sends view request&lt;/div&gt;&lt;div&gt;AppServer -&amp;gt; Minio : Asks for file list&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; Storage : Retrieves file list&lt;/div&gt;&lt;div&gt;Storage -&amp;gt; Minio : Returns file list&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; AppServer : Sends file list&lt;/div&gt;&lt;div&gt;AppServer -&amp;gt; UI : Displays files to User&lt;/div&gt;&lt;div&gt;UI -&amp;gt; User : Shows file list&lt;/div&gt;&lt;div&gt;@enduml&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1940" width="590" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-10" value="File delete" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1910" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-11" value="@startuml&#xa;actor User&#xa;participant &quot;mac-drive-web&quot; as UI&#xa;participant &quot;macDrive&quot; as AppServer&#xa;participant &quot;Minio Server&quot; as Minio&#xa;&#xa;&#xa;User -&gt; UI : Requests to view files&#xa;UI -&gt; AppServer : Sends view request&#xa;AppServer -&gt; Minio : Requests authentication&#xa;Minio -&gt; AppServer : Provides authentication token&#xa;AppServer -&gt; Minio : Sends authenticated request for file list&#xa;Minio -&gt; Minio : Retrieves file list&#xa;Minio -&gt; Minio : Returns file list&#xa;Minio -&gt; AppServer : Sends file list&#xa;AppServer -&gt; UI : Displays files to User&#xa;UI -&gt; User : Shows file list&#xa;@enduml" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="2270" width="590" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="LQySnjO1yDNA73CeL4dr-12" value="file display" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="60" y="2238" width="80" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
   <diagram name="overall er" id="CqrkfWvKqjEvy0J3rS-4">
     <mxGraphModel dx="1756" dy="615" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -245,12 +289,12 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="hAbPgr2nNsU2SdjxLZHJ" name="第 2 页">
-    <mxGraphModel dx="2380" dy="1327" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram id="hAbPgr2nNsU2SdjxLZHJ" name="overall ddd">
+    <mxGraphModel dx="2129" dy="1015" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-86" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-86" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="-177" y="-137.5" width="1840" height="1190" as="geometry" />
         </mxCell>
         <mxCell id="S3q1-A8ORBThpEU_qU60-1" value="Register" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
@@ -271,25 +315,25 @@
         <mxCell id="S3q1-A8ORBThpEU_qU60-23" value="User&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="-60" y="180" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-1" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-1" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="10" y="160" as="sourcePoint" />
             <mxPoint x="120" y="120" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-2" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;entryX=-0.032;entryY=0.448;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="S3q1-A8ORBThpEU_qU60-13">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-2" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;entryX=-0.032;entryY=0.448;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="S3q1-A8ORBThpEU_qU60-13" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="290" y="80" as="sourcePoint" />
             <mxPoint x="410" y="10" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-3" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-3" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="680" as="sourcePoint" />
             <mxPoint x="799" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-4" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-4" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="970" y="-10" as="sourcePoint" />
             <mxPoint x="1080" y="10" as="targetPoint" />
@@ -298,274 +342,274 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-5" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-5" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1110" y="80" as="sourcePoint" />
             <mxPoint x="1070" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-12" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-12" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="314" y="216.99999999999977" as="sourcePoint" />
             <mxPoint x="448" y="143" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-13" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-13" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="20" y="229.29" as="sourcePoint" />
             <mxPoint x="140" y="229.29" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-14" value="Submit Auth Param" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#dae8fc;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-14" value="Submit Auth Param" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#dae8fc;" parent="1" vertex="1">
           <mxGeometry x="880" y="245" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-17" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-17" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1010" y="280" as="sourcePoint" />
             <mxPoint x="1140" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-18" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-18" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1110" y="399.5" as="sourcePoint" />
             <mxPoint x="1020" y="399.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-19" value="Check Param" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#dae8fc;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-19" value="Check Param" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#dae8fc;" parent="1" vertex="1">
           <mxGeometry x="880" y="370" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-22" value="Check Code" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#dae8fc;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-22" value="Check Code" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#dae8fc;" parent="1" vertex="1">
           <mxGeometry x="1310" y="90" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-23" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-23" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1210" y="90" as="sourcePoint" />
             <mxPoint x="1230" y="140" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-25" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-25" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1310" y="70" as="sourcePoint" />
             <mxPoint x="1270" y="50" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-26" value="Auth Success" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-26" value="Auth Success" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="1160" y="150" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-27" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-27" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1221" y="220" as="sourcePoint" />
             <mxPoint x="1230" y="282" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-28" value="" style="group;sketch=1;curveFitting=1;jiggle=2;" vertex="1" connectable="0" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-28" value="" style="group;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="290" y="615" width="220" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-29" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="7XOFt0l1qNprO7V9EBtW-28">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-29" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-28" vertex="1">
           <mxGeometry width="220" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-30" value="File CRUD" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#d6b656;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#fff2cc;" vertex="1" parent="7XOFt0l1qNprO7V9EBtW-28">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-30" value="File CRUD" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#d6b656;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#fff2cc;" parent="7XOFt0l1qNprO7V9EBtW-28" vertex="1">
           <mxGeometry x="50" y="62.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-31" value="File CRUD policy" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#9673a6;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#e1d5e7;" vertex="1" parent="7XOFt0l1qNprO7V9EBtW-28">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-31" value="File CRUD policy" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#9673a6;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#e1d5e7;" parent="7XOFt0l1qNprO7V9EBtW-28" vertex="1">
           <mxGeometry x="50" y="142.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-32" value="File Domain" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="7XOFt0l1qNprO7V9EBtW-28">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-32" value="File Domain" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-28" vertex="1">
           <mxGeometry x="65" y="12.5" width="90" height="35" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-60" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="7XOFt0l1qNprO7V9EBtW-28">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-60" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-28" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="200" y="200" as="sourcePoint" />
             <mxPoint x="250" y="210" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-34" value="" style="group;sketch=1;curveFitting=1;jiggle=2;" vertex="1" connectable="0" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-34" value="" style="group;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="800" y="780" width="220" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-35" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="7XOFt0l1qNprO7V9EBtW-34">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-35" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-34" vertex="1">
           <mxGeometry width="220" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-36" value="Preview" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#d6b656;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#fff2cc;" vertex="1" parent="7XOFt0l1qNprO7V9EBtW-34">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-36" value="Preview" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#d6b656;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#fff2cc;" parent="7XOFt0l1qNprO7V9EBtW-34" vertex="1">
           <mxGeometry x="50" y="62.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-37" value="Preview policy" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#9673a6;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#e1d5e7;" vertex="1" parent="7XOFt0l1qNprO7V9EBtW-34">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-37" value="Preview policy" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#9673a6;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#e1d5e7;" parent="7XOFt0l1qNprO7V9EBtW-34" vertex="1">
           <mxGeometry x="50" y="142.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-38" value="Preview Domain" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="7XOFt0l1qNprO7V9EBtW-34">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-38" value="Preview Domain" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-34" vertex="1">
           <mxGeometry x="65" y="12.5" width="90" height="35" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-63" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="7XOFt0l1qNprO7V9EBtW-34">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-63" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-34" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="105" y="-17.5" as="sourcePoint" />
             <mxPoint x="105" y="-80" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-41" value="Preview&amp;nbsp;&lt;br&gt;External System" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;sketch=1;curveFitting=1;jiggle=2;rotation=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-41" value="Preview&amp;nbsp;&lt;br&gt;External System" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;sketch=1;curveFitting=1;jiggle=2;rotation=0;" parent="1" vertex="1">
           <mxGeometry x="1030" y="665" width="151" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-42" value="Music&lt;br&gt;&amp;nbsp;Read Model" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#82b366;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#d5e8d4;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-42" value="Music&lt;br&gt;&amp;nbsp;Read Model" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#82b366;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#d5e8d4;" parent="1" vertex="1">
           <mxGeometry x="1250" y="585" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-43" value="Audio&lt;br&gt;&amp;nbsp;Read Model" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#82b366;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#d5e8d4;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-43" value="Audio&lt;br&gt;&amp;nbsp;Read Model" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#82b366;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#d5e8d4;" parent="1" vertex="1">
           <mxGeometry x="1250" y="665" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-44" value="Text&lt;br&gt;&amp;nbsp;Read Model" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#82b366;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#d5e8d4;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-44" value="Text&lt;br&gt;&amp;nbsp;Read Model" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#82b366;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#d5e8d4;" parent="1" vertex="1">
           <mxGeometry x="1250" y="745" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-45" value="User&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-45" value="User&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="-80" y="615" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-46" value="Upload File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-46" value="Upload File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="60" y="510" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-47" value="Delate File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-47" value="Delate File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="70" y="630" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-48" value="View File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-48" value="View File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="70" y="760" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-49" value="File Uploaded" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-49" value="File Uploaded" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="580" y="450" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-50" value="File Deleted" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-50" value="File Deleted" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="720" y="450" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-51" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-51" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-20" y="530" as="sourcePoint" />
             <mxPoint x="30" y="480" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-52" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-52" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-10" y="665" as="sourcePoint" />
             <mxPoint x="40" y="665" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-53" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-53" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-10" y="740" as="sourcePoint" />
             <mxPoint x="40" y="790" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-54" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-54" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="190" y="460" as="sourcePoint" />
             <mxPoint x="280" y="550" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-55" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-55" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="210" y="673.67" as="sourcePoint" />
             <mxPoint x="280" y="673.67" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-59" value="View File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-59" value="View File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="550" y="805" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-61" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-61" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="690" y="844.66" as="sourcePoint" />
             <mxPoint x="770" y="844.3299999999999" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-64" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-64" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1000" y="650" as="sourcePoint" />
             <mxPoint x="1031" y="680" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-65" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-65" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1181" y="650" as="sourcePoint" />
             <mxPoint x="1241" y="620" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-66" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-66" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1191" y="705" as="sourcePoint" />
             <mxPoint x="1241" y="705" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-67" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-67" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1190" y="750" as="sourcePoint" />
             <mxPoint x="1241" y="790" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-68" value="User&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-68" value="User&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="1497" y="187" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-69" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-69" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1480" y="200" as="sourcePoint" />
             <mxPoint x="1440" y="180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-70" value="Minio&lt;br&gt;External System" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-70" value="Minio&lt;br&gt;External System" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="590" y="595" width="171" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-71" value="Chunk Upload File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-71" value="Chunk Upload File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="60" y="400" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-74" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-74" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-20" y="570" as="sourcePoint" />
             <mxPoint x="30" y="570" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-76" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-76" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="530" y="705" as="sourcePoint" />
             <mxPoint x="580" y="655" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-77" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-77" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="740" y="595" as="sourcePoint" />
             <mxPoint x="770" y="530" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-78" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-78" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="641" y="580" as="sourcePoint" />
             <mxPoint x="641" y="530" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-80" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-80" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="590" y="585" as="sourcePoint" />
             <mxPoint x="500" y="455" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-81" value="File Uploaded" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-81" value="File Uploaded" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="300" y="480" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-85" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-85" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="370" y="545" as="sourcePoint" />
             <mxPoint x="380" y="600" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-92" value="UI" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-92" value="UI" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;" parent="1" vertex="1">
           <mxGeometry x="1430" y="660" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-93" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-93" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1371" y="690" as="sourcePoint" />
             <mxPoint x="1421" y="690" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-9" value="Auth" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#d6b656;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#fff2cc;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-9" value="Auth" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#d6b656;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#fff2cc;" parent="1" vertex="1">
           <mxGeometry x="1201" y="362.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-10" value="Auth policy" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#9673a6;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#e1d5e7;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-10" value="Auth policy" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#9673a6;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#e1d5e7;" parent="1" vertex="1">
           <mxGeometry x="1201" y="442.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-11" value="Auth" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-11" value="Auth" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="1216" y="312.5" width="90" height="35" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-96" value="" style="curved=1;endArrow=none;html=1;rounded=0;entryX=0.983;entryY=0.366;entryDx=0;entryDy=0;entryPerimeter=0;endFill=0;dashed=1;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" target="7XOFt0l1qNprO7V9EBtW-86">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-96" value="" style="curved=1;endArrow=none;html=1;rounded=0;entryX=0.983;entryY=0.366;entryDx=0;entryDy=0;entryPerimeter=0;endFill=0;dashed=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" target="7XOFt0l1qNprO7V9EBtW-86" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="741" y="91" as="sourcePoint" />
             <mxPoint x="860" y="120" as="targetPoint" />
@@ -576,7 +620,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-101" value="" style="curved=1;endArrow=none;html=1;rounded=0;endFill=0;dashed=1;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-101" value="" style="curved=1;endArrow=none;html=1;rounded=0;endFill=0;dashed=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="860" y="620" as="sourcePoint" />
             <mxPoint x="506" y="285" as="targetPoint" />
@@ -586,13 +630,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-102" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-102" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="200" y="575" as="sourcePoint" />
             <mxPoint x="290" y="630" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-56" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-56" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="200" y="789.38" as="sourcePoint" />
             <mxPoint x="280" y="760" as="targetPoint" />
@@ -625,34 +669,34 @@
         <mxCell id="S3q1-A8ORBThpEU_qU60-11" value="" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;strokeColor=#000000;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=none;sketch=1;curveFitting=1;jiggle=2;shadow=0;container=1;" parent="1" vertex="1">
           <mxGeometry x="-850" y="-137.5" width="300" height="450" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-104" value="UI" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=hatch;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-104" value="UI" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=hatch;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="-690" y="160" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="S3q1-A8ORBThpEU_qU60-27" value="Generate Token" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="690" y="252.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-20" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-20" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="873" y="380" as="sourcePoint" />
             <mxPoint x="790" y="340" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-79" value="Chunk Upload Id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-79" value="Chunk Upload Id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
           <mxGeometry x="360" y="340" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-83" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="7XOFt0l1qNprO7V9EBtW-79">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-83" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="7XOFt0l1qNprO7V9EBtW-79" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="380" y="430" as="sourcePoint" />
             <mxPoint x="340" y="460" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-8" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-8" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="1151" y="295" width="220" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-62" value="View File" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#dae8fc;" vertex="1" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-62" value="View File" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;jiggle=2;fillStyle=hatch;curveFitting=1;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fillColor=#dae8fc;" parent="1" vertex="1">
           <mxGeometry x="872" y="632" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-97" value="" style="curved=1;endArrow=none;html=1;rounded=0;exitX=0.477;exitY=0.998;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.993;entryY=0.593;entryDx=0;entryDy=0;entryPerimeter=0;endFill=0;dashed=1;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="7XOFt0l1qNprO7V9EBtW-86" target="7XOFt0l1qNprO7V9EBtW-86">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-97" value="" style="curved=1;endArrow=none;html=1;rounded=0;exitX=0.477;exitY=0.998;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.993;entryY=0.593;entryDx=0;entryDy=0;entryPerimeter=0;endFill=0;dashed=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="7XOFt0l1qNprO7V9EBtW-86" target="7XOFt0l1qNprO7V9EBtW-86" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="700" y="940" as="sourcePoint" />
             <mxPoint x="750" y="890" as="targetPoint" />
@@ -663,7 +707,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-95" value="" style="curved=1;endArrow=none;html=1;rounded=0;exitX=0.009;exitY=0.382;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.529;entryY=0.001;entryDx=0;entryDy=0;entryPerimeter=0;endFill=0;dashed=1;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="7XOFt0l1qNprO7V9EBtW-86" target="7XOFt0l1qNprO7V9EBtW-86">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-95" value="" style="curved=1;endArrow=none;html=1;rounded=0;exitX=0.009;exitY=0.382;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.529;entryY=0.001;entryDx=0;entryDy=0;entryPerimeter=0;endFill=0;dashed=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="7XOFt0l1qNprO7V9EBtW-86" target="7XOFt0l1qNprO7V9EBtW-86" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-182" y="331" as="sourcePoint" />
             <mxPoint x="-132" y="281" as="targetPoint" />
@@ -675,7 +719,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-107" value="" style="group" vertex="1" connectable="0" parent="1">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-107" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="430" y="-77" width="220" height="240" as="geometry" />
         </mxCell>
         <mxCell id="S3q1-A8ORBThpEU_qU60-13" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;fillStyle=hatch;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-107" vertex="1">
@@ -690,55 +734,11 @@
         <mxCell id="S3q1-A8ORBThpEU_qU60-16" value="User Center" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-107" vertex="1">
           <mxGeometry x="65" y="7" width="90" height="35" as="geometry" />
         </mxCell>
-        <mxCell id="7XOFt0l1qNprO7V9EBtW-21" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="7XOFt0l1qNprO7V9EBtW-107">
+        <mxCell id="7XOFt0l1qNprO7V9EBtW-21" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="7XOFt0l1qNprO7V9EBtW-107" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="271" y="305" as="sourcePoint" />
             <mxPoint x="208" y="225" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="ILCn9BO9myJM3LrbQQf_" name="plantUML">
-    <mxGraphModel dx="929" dy="615" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <mxCell id="LQySnjO1yDNA73CeL4dr-1" value="&lt;div&gt;@startuml&lt;/div&gt;&lt;div&gt;actor User&lt;/div&gt;&lt;div&gt;participant &quot;Registration Page&quot; as RegPage&lt;/div&gt;&lt;div&gt;participant &quot;Email Service&quot; as EmailService&lt;/div&gt;&lt;div&gt;participant &quot;Authentication Service&quot; as AuthService&lt;/div&gt;&lt;div&gt;participant &quot;Token Service&quot; as TokenService&lt;/div&gt;&lt;div&gt;database &quot;Database&quot; as DB&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; RegPage : Access Registration Page&lt;/div&gt;&lt;div&gt;RegPage -&amp;gt; User : Display Registration Form&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; RegPage : Enter Username, Password, Email&lt;/div&gt;&lt;div&gt;User -&amp;gt; RegPage : Submit Registration Info&lt;/div&gt;&lt;div&gt;RegPage -&amp;gt; AuthService : Request Username and Email Validation&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; DB : Check for Unique Username and Email&lt;/div&gt;&lt;div&gt;DB --&amp;gt; AuthService : Confirm Uniqueness&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; TokenService : Request Activation Token Generation&lt;/div&gt;&lt;div&gt;TokenService -&amp;gt; DB : Create Activation Token and Associate with User Info&lt;/div&gt;&lt;div&gt;DB --&amp;gt; TokenService : Activation Token Created Successfully&lt;/div&gt;&lt;div&gt;TokenService --&amp;gt; AuthService : Return Activation Token&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; EmailService : Send Email with Activation Token for Verification&lt;/div&gt;&lt;div&gt;EmailService -&amp;gt; User : Send Activation Email&lt;/div&gt;&lt;div&gt;User -&amp;gt; EmailService : Click Activation Link in Email&lt;/div&gt;&lt;div&gt;EmailService -&amp;gt; AuthService : Validate Activation Link and Token&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; DB : Activate User Account&lt;/div&gt;&lt;div&gt;DB --&amp;gt; AuthService : Account Activation Successful&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; User : Confirm Account Activation and Provide Login Page&lt;/div&gt;&lt;div&gt;@enduml&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="70" y="150" width="600" height="510" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-2" value="UserRegister" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="70" y="120" width="90" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-3" value="&lt;div&gt;@startuml&lt;/div&gt;&lt;div&gt;actor User&lt;/div&gt;&lt;div&gt;participant &quot;Login Page&quot; as LoginPage&lt;/div&gt;&lt;div&gt;participant &quot;Captcha Service&quot; as Captcha&lt;/div&gt;&lt;div&gt;participant &quot;Authentication Service&quot; as AuthService&lt;/div&gt;&lt;div&gt;participant &quot;Token Service&quot; as TokenService&lt;/div&gt;&lt;div&gt;database &quot;Database&quot; as DB&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : Accesses Login Page&lt;/div&gt;&lt;div&gt;LoginPage -&amp;gt; Captcha : Request Captcha&lt;/div&gt;&lt;div&gt;Captcha --&amp;gt; LoginPage : Display Captcha Image&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : Enters Username and Password&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : Enters Captcha Code&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : (Optional) Selects &quot;Remember me&quot;&lt;/div&gt;&lt;div&gt;User -&amp;gt; LoginPage : Clicks &quot;Login&quot;&lt;/div&gt;&lt;div&gt;LoginPage -&amp;gt; AuthService : Submits Credentials &amp;amp; Captcha Code&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; Captcha : Validates Captcha Code&lt;/div&gt;&lt;div&gt;Captcha --&amp;gt; AuthService : Captcha Valid&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; DB : Checks User Details&lt;/div&gt;&lt;div&gt;DB --&amp;gt; AuthService : User Details Valid&lt;/div&gt;&lt;div&gt;AuthService -&amp;gt; TokenService : Request Token Generation&lt;/div&gt;&lt;div&gt;TokenService -&amp;gt; DB : Create and Store Token&lt;/div&gt;&lt;div&gt;DB --&amp;gt; TokenService : Token Created&lt;/div&gt;&lt;div&gt;TokenService --&amp;gt; AuthService : Token Generated&lt;/div&gt;&lt;div&gt;AuthService --&amp;gt; LoginPage : User Authenticated&lt;/div&gt;&lt;div&gt;LoginPage -&amp;gt; User : Displays Dashboard / User Area&lt;/div&gt;&lt;div&gt;@enduml&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="70" y="730" width="600" height="400" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-4" value="User Login" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="70" y="700" width="80" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-5" value="&lt;div&gt;@startuml&lt;/div&gt;&lt;div&gt;actor User&lt;/div&gt;&lt;div&gt;participant &quot;mac-drive-web (UI)&quot; as UI&lt;/div&gt;&lt;div&gt;participant &quot;macDrive&quot; as AppServer&lt;/div&gt;&lt;div&gt;participant &quot;Minio Server&quot; as Minio&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; UI : Selects file and initiates upload&lt;/div&gt;&lt;div&gt;UI -&amp;gt; AppServer : Sends upload request&lt;/div&gt;&lt;div&gt;AppServer -&amp;gt; Minio : Requests file storage&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; Minio : Stores the file&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; Minio : Confirms successful storage and generate docId&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; AppServer : Confirms file is stored&lt;/div&gt;&lt;div&gt;AppServer -&amp;gt; UI : Notifies successful upload&lt;/div&gt;&lt;div&gt;UI -&amp;gt; User : Displays success message&lt;/div&gt;&lt;div&gt;@enduml&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="70" y="1180" width="600" height="290" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-6" value="File Upload" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="70" y="1150" width="80" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-7" value="@startuml&#xa;actor User&#xa;participant &quot;mac-drive-web&quot; as UI&#xa;participant &quot;macDrive&quot; as AppServer&#xa;participant &quot;Minio Server&quot; as Minio&#xa;&#xa;&#xa;User -&gt; UI : Selects file&#xa;UI -&gt; AppServer : Initiates upload&#xa;AppServer -&gt; AppServer : Splits file into chunks&#xa;loop for each chunk&#xa;    AppServer -&gt; Minio : Uploads chunk&#xa;    Minio -&gt; Minio : Stores chunk&#xa;    Minio -&gt; Minio : Confirms storage&#xa;    Minio -&gt; AppServer : Confirms chunk upload&#xa;end&#xa;AppServer -&gt; AppServer : Reassembles file from chunks&#xa;AppServer -&gt; Minio : Sends reassembled file metadata&#xa;Minio -&gt; Minio : Stores metadata&#xa;Minio -&gt; Minio : Confirms metadata storage&#xa;Minio -&gt; AppServer : Confirms file is ready&#xa;AppServer -&gt; UI : Notifies successful upload&#xa;UI -&gt; User : Displays success message&#xa;@enduml" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="70" y="1510" width="600" height="360" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-8" value="File Chunk Upload" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="70" y="1480" width="120" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-9" value="&lt;div&gt;@startuml&lt;/div&gt;&lt;div&gt;actor User&lt;/div&gt;&lt;div&gt;participant &quot;User Interface (UI)&quot; as UI&lt;/div&gt;&lt;div&gt;participant &quot;Application Server&quot; as AppServer&lt;/div&gt;&lt;div&gt;participant &quot;Minio Server&quot; as Minio&lt;/div&gt;&lt;div&gt;database &quot;Data Storage&quot; as Storage&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User -&amp;gt; UI : Requests to view files&lt;/div&gt;&lt;div&gt;UI -&amp;gt; AppServer : Sends view request&lt;/div&gt;&lt;div&gt;AppServer -&amp;gt; Minio : Asks for file list&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; Storage : Retrieves file list&lt;/div&gt;&lt;div&gt;Storage -&amp;gt; Minio : Returns file list&lt;/div&gt;&lt;div&gt;Minio -&amp;gt; AppServer : Sends file list&lt;/div&gt;&lt;div&gt;AppServer -&amp;gt; UI : Displays files to User&lt;/div&gt;&lt;div&gt;UI -&amp;gt; User : Shows file list&lt;/div&gt;&lt;div&gt;@enduml&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="70" y="1940" width="590" height="270" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-10" value="File delete" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="70" y="1910" width="80" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-11" value="@startuml&#xa;actor User&#xa;participant &quot;mac-drive-web&quot; as UI&#xa;participant &quot;macDrive&quot; as AppServer&#xa;participant &quot;Minio Server&quot; as Minio&#xa;&#xa;&#xa;User -&gt; UI : Requests to view files&#xa;UI -&gt; AppServer : Sends view request&#xa;AppServer -&gt; Minio : Requests authentication&#xa;Minio -&gt; AppServer : Provides authentication token&#xa;AppServer -&gt; Minio : Sends authenticated request for file list&#xa;Minio -&gt; Minio : Retrieves file list&#xa;Minio -&gt; Minio : Returns file list&#xa;Minio -&gt; AppServer : Sends file list&#xa;AppServer -&gt; UI : Displays files to User&#xa;UI -&gt; User : Shows file list&#xa;@enduml" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="70" y="2270" width="590" height="260" as="geometry" />
-        </mxCell>
-        <mxCell id="LQySnjO1yDNA73CeL4dr-12" value="file display" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="60" y="2238" width="80" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
