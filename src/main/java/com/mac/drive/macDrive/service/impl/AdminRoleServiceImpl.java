@@ -16,7 +16,7 @@ public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole
 
     @Override
     public void register(int adminId, int i) {
-        AdminRole userRole =new AdminRole();
+        AdminRole userRole = new AdminRole();
         userRole.setAdminId(adminId);
         userRole.setRid(i);
         adminRoleMapper.insert(userRole);
